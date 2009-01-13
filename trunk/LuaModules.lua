@@ -52,10 +52,20 @@ function require(name)
     if P then return P end
 
     local result
+
     P = package.preload[name]
     if P then 
         result = P(name)
+    end
 
+    if not result then
+        for _, L in ipairs(package.loaders) do
+            result = L(name)
+            if result then break end
+        end
+    end
+
+    if result or package.loaded[name] then 
         package.loaded[name] = result or true
     
         return package.loaded[name]
