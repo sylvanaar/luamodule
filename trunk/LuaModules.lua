@@ -1,4 +1,5 @@
 -- This is an implemenation of the Lua Module API http://www.lua.org/manual/5.1/manual.html#pdf-module
+-- A better implementation can be found here: http://www.keplerproject.org/compat/
 
 --@debug@ 
 local dbg = print 
@@ -18,8 +19,8 @@ local function tailExec(t, a, ...)
 end
 
 
---- Create a Lua Module
---Creates a module. If there is a table in package.loaded[name], this table is the module. 
+---Creates a Lua Module.
+--If there is a table in package.loaded[name], this table is the module. 
 --Otherwise, if there is a global table t with the given name, this table is the module. 
 --Otherwise creates a new table t and sets it as the value of the global name and the value of package.loaded[name]. 
 --This function also initializes t._NAME with the given name, t._M with the module (t itself), and t._PACKAGE with the package name (the full module name minus last component). 
@@ -56,8 +57,8 @@ end
 --
 --Once a loader is found, require calls the loader with a single argument, modname. 
 -- If the loader returns any value, require assigns the returned value to package.loaded[modname]. 
---  If the loader returns no value and has not assigned any value to package.loaded[modname], then require assigns true to this entry. 
---  In any case, require returns the final value of package.loaded[modname]. 
+-- If the loader returns no value and has not assigned any value to package.loaded[modname], then require assigns true to this entry. 
+-- In any case, require returns the final value of package.loaded[modname]. 
 --
 --If there is any error loading or running the module, or if it cannot find any loader for the module, then require signals an error. 
 --@param name The package name.
