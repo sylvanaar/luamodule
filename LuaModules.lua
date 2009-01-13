@@ -5,7 +5,7 @@ package = package or {}
 package.seeall = package.seeall or {__index = _G, __tostring="Global Visibiltity"} 
 package.preload = package.preload or {}
 package.loaders = package.loaders or {}
-
+package.loaded = package.loaded or {}
 
 --- Create a Lua Module
 --Creates a module. If there is a table in package.loaded[name], this table is the module. Otherwise, if there is a global table t with the given name, this table is the module. Otherwise creates a new table t and sets it as the value of the global name and the value of package.loaded[name]. This function also initializes t._NAME with the given name, t._M with the module (t itself), and t._PACKAGE with the package name (the full module name minus last component; see below). Finally, module sets t as the new environment of the current function and the new value of package.loaded[name], so that require returns t. 
@@ -47,7 +47,7 @@ end
 --If there is any error loading or running the module, or if it cannot find any loader for the module, then require signals an error. 
 --@param name The package name.
 function require(name)
-    dbg("  Requirment For: %s by %s"):format(name, tostring(_NAME)) 
+    dbg(("Requirment For: %s by %s"):format(name, tostring(_NAME))) 
     local P = package.loaded[name]
     if P then return P end
 

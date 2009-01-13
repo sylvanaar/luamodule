@@ -1,6 +1,6 @@
 -- For package.preload
 local function LibStubLoader(lib)
-    package.loaded[lib] = LibStub(maj)
+    package.loaded[lib] = LibStub(lib)
     return package.loaded[lib]  
 end
     
